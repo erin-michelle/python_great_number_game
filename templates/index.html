@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Great Number Game</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#show-button").click(function() {
+					$(".box").show("slow", function() {
+	   				 // Animation complete.
+	  				});
+	  			});
+		});	
+	</script>
+	<style type="text/css">
+
+		.container {
+			position: absolute;
+			margin: auto;
+
+		}
+
+		.inner-div {
+			margin: 150px;
+			position: relative;
+		}
+
+		.box1 {
+			width: 300px;
+			height: 300px;
+			margin: 20px;
+			background-color: pink;
+			border: 2px solid black;
+
+		}
+
+		.box2 {
+			width: 300px;
+			height: 300px;
+			margin: 20px;
+			background-color: grey;
+			border: 2px solid black;
+
+
+		}
+
+		.box1 {
+			width: 300px;
+			height: 300px;
+			margin: 20px;
+			background-color: blue;
+			border: 2px solid black;
+
+		}
+
+		p {
+			margin: auto;
+			font-family: futura;
+		}
+
+		h1 {
+			font-family: futura;
+		}
+
+
+
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="inner-div">
+			<h1>Welcome to the Great Number Game!</h1>
+			<p>I am thinking of a number between 1 and 100</p>
+			<p>Take a guess!</p>
+			<form action="/submit" method="post">
+			  <input type="text" name="number"><br>
+			  <input type="submit" value="Submit">
+			</form>
+			{% if session['guess'] %}	
+				{% if session['random'] == session['guess']: %}
+					<p class="box1"> {{session['guess']}} was the number! </p> 
+						
+				{% elif session['random'] > session['guess']: %}
+					<p class="box2"> {{session['guess']}} was your guess. Too low, bro.</p>
+
+				{% elif session['random'] < session['guess']: %}
+					<p class="box3"> {{session['guess']}} was your guess. Too high, Marty McFly.</p>
+				{% endif %} 
+ 			{% endif %}
+			<a href="/reset"><button>Play again!</button></a>
+		</div>
+	</div>
+</body>
+</html>
